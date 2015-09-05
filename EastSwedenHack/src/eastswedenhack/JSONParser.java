@@ -1,17 +1,21 @@
 package eastswedenhack;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import java.util.Scanner;
+import java.util.StringTokenizer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Scanner;
 
 /**
  *  Station Linköping: 85250
@@ -24,7 +28,6 @@ public class JSONParser {
 
 	// Url for the metobs API
 	private String metObsAPI = "http://opendata-download-metobs.smhi.se/api";
-
 
 	/**
 	 * Print all available parameters.
@@ -165,7 +168,7 @@ public class JSONParser {
                         // ****PERIOD**** // -- ALWAYS USE latest-hour
                         //String periodN = openDataMetobsReader.setPeriodNames(paramN, stationN);
                         //String periodT = openDataMetobsReader.setPeriodNames(paramT, stationT);
-                        
+                                                
                         // ****DATA**** //
                         String catDataN = openDataMetobsReader.getData(nederBord, station, period);
                         String catDataT = openDataMetobsReader.getData(luftTemp, station, period);
@@ -184,6 +187,8 @@ public class JSONParser {
                         System.out.println("Regn: " + rain);
                         System.out.println("Temperatur: " + temperature + " C");
                         
+                        openDataMetobsReader.save("/Users/Daniel/Documents/East-Sweden-Hack-2015/index.txt", rain, temperature);
+                        
                         //System.out.println(catDataT);
                         // ******** //
                      
@@ -191,6 +196,42 @@ public class JSONParser {
 			e.printStackTrace();
 		}
 	}
+  
+    //Hämtar värde från Json filen, som hämtas från databasen
+    private String getValue(String parameterKey, String stationKey, String periodName) throws IOException {
+        
+        String urlToRead = metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.json";
+        
+        JSONObject dataObject = readJsonFromUrl(urlToRead);
+        JSONArray dataArray = dataObject.getJSONArray("value");   
+
+        String dataKey = null;
+        for (int i = 0; i < dataArray.length(); i++) {
+
+                JSONObject parameter = dataArray.getJSONObject(i);
+                dataKey = parameter.getString("value");
+                //String dataName = parameter.getString("title");
+                //System.out.println(dataKey);
+        }
+
+        return dataKey;
+        
+    }
+    
+    //Sparar till textfil
+    public void save(String utFil, String rain, String temperature) throws IOException {
+        FileWriter outfile = new FileWriter(utFil, true); 
+        
+        BufferedWriter bufferedWriter = new BufferedWriter(outfile);
+
+        bufferedWriter.write("\n" + rain + " " + temperature);
+        
+        bufferedWriter.close();
+    }
+}
+
+
+
 
 //    private String setParameter(String weather) throws IOException, JSONException {
 //                
@@ -240,24 +281,3 @@ public class JSONParser {
 //        }
 //        return "notfound";
 //    }
-    
-    private String getValue(String parameterKey, String stationKey, String periodName) throws IOException {
-        
-        String urlToRead = metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.json";
-        
-        JSONObject dataObject = readJsonFromUrl(urlToRead);
-        JSONArray dataArray = dataObject.getJSONArray("value");   
-
-        String dataKey = null;
-        for (int i = 0; i < dataArray.length(); i++) {
-
-                JSONObject parameter = dataArray.getJSONObject(i);
-                dataKey = parameter.getString("value");
-                //String dataName = parameter.getString("title");
-                //System.out.println(dataKey);
-        }
-
-        return dataKey;
-        
-    }
-}
