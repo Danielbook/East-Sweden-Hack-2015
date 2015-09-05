@@ -11,10 +11,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Scanner;
 
 /**
- * Example class for the SMHI metobs API. Uses org.json for JSON parsing.
- *
+ *  Station Linköping: 85250
+ *  Lufttemperatur: 19, 20, 2, 1 
+ *  Nederbördsmängd: 14, 7, 5
+ *  Period: latest-hour
+ *  
+ * 
+ * 
  */
 public class JSONParser {
 
@@ -32,7 +38,7 @@ public class JSONParser {
 	private String getParameters() throws IOException, JSONException {
 
 		JSONObject parameterObject = readJsonFromUrl(metObsAPI + "/version/latest.json");
-		JSONArray parametersArray = parameterObject.getJSONArray("resource");
+		JSONArray parametersArray = parameterObject.getJSONArray("resource");   
 
 		String parameterKey = null;
 		for (int i = 0; i < parametersArray.length(); i++) {
@@ -45,8 +51,7 @@ public class JSONParser {
 
 		return parameterKey;
 	}
-
-
+        
 	/**
 	 * Print all available stations for the given parameter. Return the id for the last station.
 	 *
@@ -105,7 +110,8 @@ public class JSONParser {
 	 * @throws JSONException
 	 */
 	private String getData(String parameterKey, String stationKey, String periodName) throws IOException {
-		return readStringFromUrl(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.csv");
+                System.out.println(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.xml");
+		return readStringFromUrl(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.xml");
 	}
 
 
@@ -132,15 +138,96 @@ public class JSONParser {
 	}
 
 	public static void main(String... args) {
+            
+            String station = "Linköping";
+            String period = "latest-hour";
 		try {
 			JSONParser openDataMetobsReader = new JSONParser();
-			String parameterKey = openDataMetobsReader.getParameters();
+			/*
+                        String parameterKey = openDataMetobsReader.getParameters();
 			String stationKey = openDataMetobsReader.getStationNames(parameterKey);
 			String periodName = openDataMetobsReader.getPeriodNames(parameterKey, stationKey);
-			String data = openDataMetobsReader.getData(parameterKey, stationKey, periodName);
+                        String data = openDataMetobsReader.getData(parameterKey, stationKey, periodName);                            
 			System.out.println(data);
+                        */
+                    
+                        // ****NEDERBÖRD**** //
+                        String paramN = openDataMetobsReader.setParameter("Nederbördsmängd");
+                        
+                        // ****TEMPERATUR**** //
+                        String paramT = openDataMetobsReader.setParameter("Lufttemperatur");
+                        
+                        // ****STATION**** //
+                        String stationN = openDataMetobsReader.setStation(paramN, station);
+                        String stationT = openDataMetobsReader.setStation(paramT, station);
+                        
+                        // ****PERIOD**** // -- ALWAYS USE latest-hour
+                        //String periodN = openDataMetobsReader.setPeriodNames(paramN, stationN);
+                        //String periodT = openDataMetobsReader.setPeriodNames(paramT, stationT);
+                        
+                        // ****DATA**** //
+                        String catDataN = openDataMetobsReader.getData(paramN, stationN, period);
+                        //String catDataT = openDataMetobsReader.getData(paramT, stationT, period);
+                        
+                        System.out.println(catDataN);
+                        //System.out.println(catDataT);
+                        // ******** //
+                     
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
 	}
+
+    private String setParameter(String weather) throws IOException, JSONException {
+                
+        String weatherKey = null;
+        
+        JSONObject parameterObject = readJsonFromUrl(metObsAPI + "/version/latest.json");
+        JSONArray parametersArray = parameterObject.getJSONArray("resource");   
+
+        String parameterKey = null;
+        for (int i = 0; i < parametersArray.length(); i++) {
+
+                JSONObject parameter = parametersArray.getJSONObject(i);
+                parameterKey = parameter.getString("key");
+                String parameterName = parameter.getString("title");
+                //System.out.println(parameterKey + ": " + parameterName);
+                
+                if(parameterName.equalsIgnoreCase(weather))
+                {
+                    weatherKey = parameterKey;
+                    System.out.println("Väder: " + parameterName + " | Nyckel: " + weatherKey);
+                    break;
+                }
+ 
+        }
+        return weatherKey;
+    }
+
+    private String setStation(String weatherKey, String station) throws IOException, JSONException {
+        
+        String stationKey = null;
+                
+        JSONObject stationsObject = readJsonFromUrl(metObsAPI + "/version/latest/parameter/" + weatherKey + ".json");
+        JSONArray stationsArray = stationsObject.getJSONArray("station");
+       
+        String stationId = null;
+        for (int i = 0; i < stationsArray.length(); i++) {
+                String stationName = stationsArray.getJSONObject(i).getString("name");
+                stationId = stationsArray.getJSONObject(i).getString("key");
+                //System.out.println(stationId + ": " + stationName);
+                
+                if(stationName.equalsIgnoreCase(station))
+                {
+                    stationKey = stationId;
+                    System.out.println("Väder: " + stationName + " | Nyckel: " + stationId);
+                    break;
+                }
+        }
+
+        return stationId;
+    }
+    
+    
+
 }
