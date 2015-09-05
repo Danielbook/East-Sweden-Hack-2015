@@ -109,7 +109,7 @@ public class JSONParser {
 	 */
 	private String getData(String parameterKey, String stationKey, String periodName) throws IOException {
                 //System.out.println(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.csv");
-		return readStringFromUrl(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.csv");
+		return readStringFromUrl(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.json");
 	}
 
 
@@ -170,12 +170,19 @@ public class JSONParser {
                         String catDataN = openDataMetobsReader.getData(nederBord, station, period);
                         String catDataT = openDataMetobsReader.getData(luftTemp, station, period);
                         
+                        String rain = openDataMetobsReader.getValue(nederBord, station, period);
+                        String temperature = openDataMetobsReader.getValue(luftTemp, station, period);
+
                         System.out.println(catDataN);
                         
                         System.out.println("****************");
                         
-                        
                         System.out.println(catDataT);
+                        
+                        System.out.println("****************");
+                        
+                        System.out.println("Regn: " + rain);
+                        System.out.println("Temperatur: " + temperature + " C");
                         
                         //System.out.println(catDataT);
                         // ******** //
@@ -234,9 +241,23 @@ public class JSONParser {
 //        return "notfound";
 //    }
     
-    private void getRain(String parameterKey, String stationKey, String periodName) throws IOException {
-    
-        readStringFromUrl(metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.json");
+    private String getValue(String parameterKey, String stationKey, String periodName) throws IOException {
+        
+        String urlToRead = metObsAPI + "/version/latest/parameter/" + parameterKey + "/station/" + stationKey + "/period/" + periodName + "/data.json";
+        
+        JSONObject dataObject = readJsonFromUrl(urlToRead);
+        JSONArray dataArray = dataObject.getJSONArray("value");   
+
+        String dataKey = null;
+        for (int i = 0; i < dataArray.length(); i++) {
+
+                JSONObject parameter = dataArray.getJSONObject(i);
+                dataKey = parameter.getString("value");
+                //String dataName = parameter.getString("title");
+                //System.out.println(dataKey);
+        }
+
+        return dataKey;
         
     }
 }
