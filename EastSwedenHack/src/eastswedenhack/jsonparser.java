@@ -72,7 +72,7 @@ public class jsonparser {
                         System.out.println("Regn: " + rain);
                         System.out.println("Temperatur: " + temperature + " C");
                         
-                        openDataMetobsReader.save("/Users/Daniel/Documents/East-Sweden-Hack-2015/index.txt", rain, temperature);
+                        openDataMetobsReader.save("index.txt", rain, temperature);
                         
                         //System.out.println(catDataT);
                         // ******** //
