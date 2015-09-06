@@ -52,8 +52,8 @@
 	position: absolute;
 	margin-top: 7%;
 	margin-left: 30%;
-	position: top;
-	z-index: 50px;	
+	z-index: 50px;
+      font-size: 3vh;
 }
 
 .message
@@ -62,15 +62,16 @@
 	margin-top: 18%;
 	margin-left: 15%;
 	position: top;
-	z-index: 50px;	
+	z-index: 50px;
 	font-size: 18px;
 }
 
 .img-position-top
 {
 	position:absolute;
-	width: 100px;
-    height: 100px;
+	height:auto;
+      min-width: 80px;
+      max-width:8vmax;
     left:15%;
     top:2%;
     z-index:5;
@@ -89,5 +90,3 @@
 {
 	padding:40px;
 }
-
- 	
