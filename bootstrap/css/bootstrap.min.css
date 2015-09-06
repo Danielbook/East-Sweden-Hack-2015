@@ -36,16 +36,6 @@
 
 }
 
-.logoCloud
-{
-	position: absolute;
-	position: top;
-	margin-left: 10%;
-	height: 100px;
-	width: 100px;
-	z-index: 100px;
-}
-
 .date
 {
 	position: absolute;
