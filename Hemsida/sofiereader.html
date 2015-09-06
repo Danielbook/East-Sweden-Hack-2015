@@ -1,0 +1,80 @@
+<html>
+    <head>
+    </head>
+    <body>
+
+<?php 
+    $add = 1;
+    $counter = 0;
+// file example 1: read a text file into an array, with 
+// each line in a new element
+
+// första raden är tom, andra regn och trejde temp
+$filename="data.txt"; 
+$lines = array(); 
+$file = fopen($filename, "r"); 
+while(!feof($file)) { 
+
+    //read file line by line into a new array element 
+    $lines[] = fgets($file, 4096); 
+   $counter = $counter + $add;
+} 
+fclose ($file); 
+print_r($lines); 
+//print ($lines[3]);
+//print($counter); 
+//print($counter - $add); 
+//print($lines[$counter- 2 * $add]);
+// moln, kallt varmt,sol
+
+// hämta bild
+    $piccounter = 1;
+    $name = "pic/image";
+
+    $name = "pic/image".$piccounter.".jpg";
+
+    print($name);
+
+   $image = $name;
+    // Read image path, convert to base64 encoding
+    $imageData = base64_encode(file_get_contents($image));
+
+    // Format the image SRC:  data:{mime};base64,{data};
+    $src = 'data: '.mime_content_type($image).';base64,'.$imageData;
+
+    // Echo out a sample image
+    echo '<img src="' . $src . '">';
+
+    $piccounter = $piccounter + 1;
+
+?>
+
+<?php if ($lines[($counter - $add)] < 0 && $lines[($counter - add)] >= 0): ?>
+
+<h> snö </h>
+
+<?php elseif ($lines[($counter - 2*$add)] > 0) : ?>
+
+<h>regn </h>
+
+<?php elseif ($lines[($counter - $add)] <= 5) : ?>
+
+<h>Kallt </h>
+
+<?php elseif ($lines[($counter - $add)] >= 15 ) : ?>
+
+<h>varmt </h>
+
+<?php elseif ($lines[($counter - $add)] < 15 && $lines[($counter - $add)] > 5) : ?>
+
+<h>moln </h>
+
+<?php else: ?>
+
+<?php endif ?>
+
+
+    </div>
+    </body>
+    </html>
+
