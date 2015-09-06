@@ -9,13 +9,88 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Business Frontpage - Start Bootstrap Template</title>
+    <title>Kattappstrof</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/business-frontpage.css" rel="stylesheet">
+
+    <?php
+      function setPost()  {
+
+        echo '<div class="row">';
+        echo  '<div class="col-md-6">';
+
+        $piccounter = 1;
+        $name = "image";
+        $name = "image".$piccounter.".jpg";
+
+        $image = $name;
+        // Read image path, convert to base64 encoding
+        $imageData = base64_encode(file_get_contents($image));
+
+        // Format the image SRC:  data:{mime};base64,{data};
+        $src = 'data: '.mime_content_type($image).';base64,'.$imageData;
+
+        // Echo out a sample image
+        echo '<img class="img-responsive" id="imageCat" src="' . $src . '">';
+
+        $piccounter = $piccounter + 1;
+
+        echo '</div>';
+
+            echo '<div class="col-md-6" style="border-style:none;" >';
+
+            echo '<h2 class="date" >2015-09-05 21:37</h2> ';
+
+            echo '<p class="message">Mjau! Jag vill in det är kallt ute  </p> ';
+
+            echo ' <img class="img-responsive" src="css/bubble.png" alt="bubbla">';
+
+            $add = 1;
+        $counter = 0;
+        // file example 1: read a text file into an array, with
+        // each line in a new element
+
+        // första raden är tom, andra regn och trejde temp
+        $filename="index.txt";
+        $lines = array();
+        $file = fopen($filename, "r");
+        while(!feof($file)) {
+
+        //read file line by line into a new array element
+            $lines[] = fgets($file, 4096);
+            $counter = $counter + $add;
+        }
+
+        if ($lines[($counter - $add)] < 0 && $lines[($counter - add)] >= 0 )
+        {
+            echo '<h>snö</h>';
+        }
+        elseif ($lines[($counter - 2*$add)] > 0)
+        {
+            echo '<img class="img-position-top" src="moln.png" alt="">';
+        }
+        elseif ($lines[($counter - $add)] <= 5)
+        {
+            echo '<h>Kallt </h>';
+        }
+        elseif ($lines[($counter - $add)] >= 15 )
+        {
+            echo '<h>varmt </h>';
+        }
+
+        elseif ($lines[($counter - $add)] < 15 && $lines[($counter - $add)] > 5)
+        {
+            echo '<img class="img-position-top" src="moln.png" alt="">';
+        }
+
+        echo '</div>';
+            echo '</div>';
+    }?>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,44 +111,29 @@
     <!-- Image Background Page Header -->
     <!-- Note: The background image is set within the business-casual.css file. -->
 
-    <!-- Page Content -->
-    <div class="container">
+    <?php $set = setPost(); ?>
 
-        <div class="row" >
-            <div class="col-md-6">
+    <?php $set = setPost(); ?>
 
-                 <img class="img-responsive" id="imageCat" src="image1.jpg" alt="" >
+    <!-- Page Content
+      <div class="container">
 
+            <div class="row" >
+                  <div class="col-md-6">
+                        <img class="img-responsive" id="imageCat" src="image1.jpg" alt="" >
+                  </div>
+
+                  <div class="col-md-6" style="border-style:none;" >
+
+                        <div style="static">
+                              <img class="img-position-top" src="moln.png" alt="">
+                             <h2 class="date" >2015-09-05 21:37  </h2>
+                             <p class="message">Mjau! Jag vill in det är kallt ute</p>
+                             <img class="img-responsive" src="css/bubble.png" alt="bubbla">
+                        </div>
+                  </div>
             </div>
-            <div class="col-md-6" style="border-style:none;" >
-
-            <div style="static">
-                  <img class="img-position-top" src="moln.png" alt="">
-
-                 <h2 class="date" >2015-09-05 21:37  </h2>
-
-                 <p class="message" >Mjau! Jag vill in det är kallt ute  </p>
-
-                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
-
-            </div>
-
-
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <div class="row">
-            <div class="col-md-7">
-
-                 <img class="img-responsive" src="Roligakatter.jpg" alt="">
-
-            </div>
-            <div class="col-md-5">
-                <h2>Katt</h2>
-
-            </div>
-        </div>
+            -->
         <!-- /.row -->
 
         <!-- Footer -->

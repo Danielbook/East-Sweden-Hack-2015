@@ -5,13 +5,13 @@
  */
 
 body {
-    padding-top: 200px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 80px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 
 .business-header {
-    height: 150px;
+    height: 80px;
     background: url(header_150px.png) center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
