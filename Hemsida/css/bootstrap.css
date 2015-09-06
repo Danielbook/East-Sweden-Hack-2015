@@ -657,7 +657,7 @@ th {
 .glyphicon-certificate:before {
   content: "\e124";
 }
-.glyphicon-thumbs-up:before {
+.glyphicon-thumup:before {
   content: "\e125";
 }
 .glyphicon-thumbs-down:before {
@@ -6476,6 +6476,14 @@ button.close {
 }
 .carousel-caption .btn {
   text-shadow: none;
+}
+
+.navbar-header1
+{
+  position: top;
+  width: 100%;
+  background-color: #393938;
+
 }
 @media screen and (min-width: 768px) {
   .carousel-control .glyphicon-chevron-left,
