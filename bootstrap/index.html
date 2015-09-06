@@ -17,81 +17,6 @@
     <!-- Custom CSS -->
     <link href="css/business-frontpage.css" rel="stylesheet">
 
-    <?php
-      function setPost()  {
-
-        echo '<div class="row">';
-        echo  '<div class="col-md-6">';
-
-        $piccounter = 1;
-        $name = "image";
-        $name = "image".$piccounter.".jpg";
-
-        $image = $name;
-        // Read image path, convert to base64 encoding
-        $imageData = base64_encode(file_get_contents($image));
-
-        // Format the image SRC:  data:{mime};base64,{data};
-        $src = 'data: '.mime_content_type($image).';base64,'.$imageData;
-
-        // Echo out a sample image
-        echo '<img class="img-responsive" id="imageCat" src="' . $src . '">';
-
-        $piccounter = $piccounter + 1;
-
-        echo '</div>';
-
-            echo '<div class="col-md-6" style="border-style:none;" >';
-
-            echo '<h2 class="date" >2015-09-05 21:37</h2> ';
-
-            echo '<p class="message">Mjau! Jag vill in det är kallt ute  </p> ';
-
-            echo ' <img class="img-responsive" src="css/bubble.png" alt="bubbla">';
-
-            $add = 1;
-        $counter = 0;
-        // file example 1: read a text file into an array, with
-        // each line in a new element
-
-        // första raden är tom, andra regn och trejde temp
-        $filename="index.txt";
-        $lines = array();
-        $file = fopen($filename, "r");
-        while(!feof($file)) {
-
-        //read file line by line into a new array element
-            $lines[] = fgets($file, 4096);
-            $counter = $counter + $add;
-        }
-
-        if ($lines[($counter - $add)] < 0 && $lines[($counter - add)] >= 0 )
-        {
-            echo '<h>snö</h>';
-        }
-        elseif ($lines[($counter - 2*$add)] > 0)
-        {
-            echo '<img class="img-position-top" src="moln.png" alt="">';
-        }
-        elseif ($lines[($counter - $add)] <= 5)
-        {
-            echo '<h>Kallt </h>';
-        }
-        elseif ($lines[($counter - $add)] >= 15 )
-        {
-            echo '<h>varmt </h>';
-        }
-
-        elseif ($lines[($counter - $add)] < 15 && $lines[($counter - $add)] > 5)
-        {
-            echo '<img class="img-position-top" src="moln.png" alt="">';
-        }
-
-        echo '</div>';
-            echo '</div>';
-    }?>
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -111,29 +36,136 @@
     <!-- Image Background Page Header -->
     <!-- Note: The background image is set within the business-casual.css file. -->
 
-    <?php $set = setPost(); ?>
+    <!-- Page Content -->
+    <div class="container">
 
-    <?php $set = setPost(); ?>
+        <div class="row" >
+            <div class="col-md-6">
 
-    <!-- Page Content
-      <div class="container">
+                 <img class="img-responsive" id="imageCat" src="image11.jpg" alt="" >
 
-            <div class="row" >
-                  <div class="col-md-6">
-                        <img class="img-responsive" id="imageCat" src="image1.jpg" alt="" >
-                  </div>
-
-                  <div class="col-md-6" style="border-style:none;" >
-
-                        <div style="static">
-                              <img class="img-position-top" src="moln.png" alt="">
-                             <h2 class="date" >2015-09-05 21:37  </h2>
-                             <p class="message">Mjau! Jag vill in det är kallt ute</p>
-                             <img class="img-responsive" src="css/bubble.png" alt="bubbla">
-                        </div>
-                  </div>
             </div>
-            -->
+            <div class="col-md-6" style="border-style:none;" >
+
+            <div style="static">
+                <a href="http://www.smhi.se/#ort=2688368,Norrk%C3%B6ping,Norrk%C3%B6ping,Sverige,58.6/16.183332">  <img class="img-position-top" src="moln.png" alt=""> </a>
+
+                 <h2 class="date" >2015-09-05 21:37  </h2>
+
+                 <p class="message" >Alltså seriöst, jag gick ju inte ut för att du
+                                    </br> inte skulle släppa in mig igen. 
+                                    <br> Jag fryser snart svansen av mig. #mjau</p>
+
+                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
+
+            </div>
+
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+       <div class="container">
+
+        <div class="row" >
+            <div class="col-md-6">
+
+                 <img class="img-responsive" id="imageCat" src="image2.jpg" alt="" >
+
+            </div>
+            <div class="col-md-6" style="border-style:none;" >
+
+            <div style="static">
+             <a href="http://www.smhi.se/#ort=2688368,Norrk%C3%B6ping,Norrk%C3%B6ping,Sverige,58.6/16.183332">   <img class="img-position-top" src="Icon/solen1.png" alt=""> </a>
+
+                 <h2 class="date" >2015-09-05 07:12  </h2>
+
+                 <p class="message" >Jag har varit ute för länge i solen,<br> & nu vill jag komma in, öppna! <br>
+
+                                    All värme är för mycket! #mjau  </p>
+
+                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
+
+            </div>
+
+
+            </div>
+        </div>
+
+         <div class="container">
+
+        <div class="row" >
+            <div class="col-md-6">
+
+                 <img class="img-responsive" id="imageCat" src="image12.jpg" alt="" >
+
+            </div>
+            <div class="col-md-6" style="border-style:none;" >
+
+            <div style="static">
+          <a href="http://www.smhi.se/#ort=2688368,Norrk%C3%B6ping,Norrk%C3%B6ping,Sverige,58.6/16.183332">   <img class="img-position-top" src="Icon/paraply.png" alt=""> </a>
+
+                 <h2 class="date" >2015-09-04 19:32  </h2>
+
+                 <p class="message" > Hallå där! <br> Min päls är genomsur av allt regn, <br> ta in mig och torka av mig #mjau  </p>
+
+                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
+
+            </div>
+
+
+            </div>
+        </div>
+
+          <div class="container">
+
+        <div class="row" >
+            <div class="col-md-6">
+
+                 <img class="img-responsive" id="imageCat" src="image10.jpg" alt="" >
+
+            </div>
+            <div class="col-md-6" style="border-style:none;" >
+
+            <div style="static">
+         <a href="http://www.smhi.se/#ort=2688368,Norrk%C3%B6ping,Norrk%C3%B6ping,Sverige,58.6/16.183332"> <img class="img-position-top" src="Icon/flinga.png" alt=""> </a>
+
+                 <h2 class="date" >2015-09-04 19:32  </h2>
+
+                 <p class="message" > Mina tassar fryser snart till is av all snö, <br> öppna åt mig! #mjau  </p>
+
+                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
+
+            </div>
+
+
+            </div>
+        </div>
+
+          <div class="container">
+
+        <div class="row" >
+            <div class="col-md-6">
+
+                 <img class="img-responsive" id="imageCat" src="image13.jpg" alt="" >
+
+            </div>
+            <div class="col-md-6" style="border-style:none;" >
+
+            <div style="static">
+               <a href="http://www.smhi.se/#ort=2688368,Norrk%C3%B6ping,Norrk%C3%B6ping,Sverige,58.6/16.183332">     <img class="img-position-top" src="Icon/kallt.png" alt=""> </a>
+
+                 <h2 class="date" >2015-09-04 19:32  </h2>
+
+                 <p class="message" > Det är jättekallt ute, <br> jag vill in till värmen #mjau </p>
+
+                 <img class="img-responsive" class="img-position" src="css/bubble.png" alt="bubbla">
+
+            </div>
+
+
+            </div>
+        </div>
         <!-- /.row -->
 
         <!-- Footer -->
