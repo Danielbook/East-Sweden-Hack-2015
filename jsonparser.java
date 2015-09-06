@@ -222,7 +222,7 @@ public class jsonparser {
         
         BufferedWriter bufferedWriter = new BufferedWriter(outfile);
 
-        bufferedWriter.write("\n" + rain + "\n" + temperature);
+        bufferedWriter.write("\n" + rain + " " + temperature);
         
         bufferedWriter.close();
     }
